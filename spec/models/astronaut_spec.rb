@@ -12,5 +12,11 @@ describe Astronaut, type: :model do
     it { should have_many :missions}
   end
 
-  
+  it 'can calculate an astronauts total time in space' do
+    astronaut = Astronaut.create(name: 'Neil', age: 60, job: 'commander')
+    astronaut.missions.create(title: 'Capricorn 4', time_in_space: 20)
+    astronaut.missions.create(title: 'Apollo 13', time_in_space: 21)
+
+    expect (astronaut.total_time_in_space).to eq(41)
+  end
 end
