@@ -21,4 +21,12 @@ describe 'astronauts index' do
     visit '/astronauts'
     expect(page).to have_content('Average Age: 50')
   end
+
+  it 'shows each astronauts missions' do
+    astronaut = Astronaut.create(name: 'Neil', age: 60, job: 'commander')
+    astronaut.missions.create(title: 'Capricorn 4', time_in_space: 20)
+    astronaut.missions.create(title: 'Apollo 13', time_in_space: 21)
+    visit '/astronauts'
+    expect(page).to have_content('Apollo 13, Capricorn 4')
+  end
 end
